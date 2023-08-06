@@ -1,0 +1,66 @@
+:root {
+    background-color: black;
+}
+
+body {
+    height: fit-content;
+}
+
+header {
+    margin-top: 5rem;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header .main-view-container {
+    margin: 2rem 5rem;
+    width: 80%;
+    background-color: brown;
+    padding: 2rem 3rem;
+    border-radius: 31px;
+    background: linear-gradient(145deg, #ffffff, #dddddd);
+    box-shadow: 5px 5px 7px #d3d3d3,
+        -5px -5px 7px #ffffff;
+}
+
+header .main-view-container .user-name {
+    margin-bottom: 0.3rem;
+}
+
+header .main-view-container .user-task input {
+    margin-top: 0.2rem;
+    width: 28rem;
+}
+
+header .main-view-container .check-container {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+header .main-view-container .check-container input {
+    background: red;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.5rem;
+    cursor: pointer;
+}
+
+header .main-view-container .btn-container {
+    margin-top: 0.7rem;
+    display: flex;
+}
+
+header .main-view-container .btn-container button {
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+    margin-right: 1rem;
+}
+
+header .main-view-container #back-btn {
+    margin-top: 2rem;
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+}
