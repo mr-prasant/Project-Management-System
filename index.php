@@ -23,52 +23,37 @@
     $query2 = "select * from tasks order by TID desc;";
     $data2 = mysqli_query($con, $query2);
 
+    require_once "./include/generateCode.php";
+
     $add_user_click = false;
     if (isset($_POST["add-user-btn"])) {
       $new_username = $_POST['new-username'];
       $add_user_click = true;
       if ($new_username != "" && $add_user_click) {
-        echo "<script>
-          const date = new Date();
-          let year = date.getFullYear();
-          let month = formatData(date.getMonth() + 1);
-          let day = formatData(date.getDate());
-          let hour = formatData(date.getHours());
-          let mins = formatData(date.getMinutes());
-          let secs = formatData(date.getSeconds());
-          let ms = formatMillisecond(date.getMilliseconds());
-          
-          function formatData(num) {
-            return num < 10 ? '0' + num : num + '';
-          }
-          
-          function formatMillisecond(num) {
-            if (num < 10) return '00' + num;
-            if (num < 100) return '0' + num;
-            return num + '';
-          }
-          
-          let UID = 'UID' + year + month + day + hour + mins + secs + ms;
-          document.cookie = 'pms_new_UID='+ UID;
-      </script>";
-
+        
         $new_UID = $_COOKIE['pms_new_UID'];
-
-        try {
-          $query = "insert into users values('" . $new_UID . "', '" . $new_username . "');";
-          $execute = mysqli_query($con, $query);
-
-          if ($execute) {
-            echo "<script>
-                alert('" . $new_UID . ": " . $new_username . " has been added');
-                window.open('index', '_self');
-              </script>";
-          } else {
+        if ($new_UID == "")  {
             echo "<script>
                 alert('Something went wrong!\n" . $new_username . " is not added, please try again!');
-              </script>";
-          }
-        } catch (Exception $ex) {
+            </script>";
+
+        } else {
+          try {
+            $query = "insert into users values('" . $new_UID . "', '" . $new_username . "');";
+            $execute = mysqli_query($con, $query);
+  
+            if ($execute) {
+              echo "<script>
+                  alert('" . $new_UID . ": " . $new_username . " has been added');
+                  window.open('index.php', '_self');
+                </script>";
+            } else {
+              echo "<script>
+                  alert('Something went wrong!\n" . $new_username . " is not added, please try again!');
+                </script>";
+            }
+          } catch (Exception $ex) { }
+          
         }
       }
     }
@@ -88,11 +73,10 @@
           if ($execute1 || $execute2) {
             echo "<script>
                 alert('User removed successfully!');
-                window.open('index', '_self');
+                window.open('index.php', '_self');
               </script>";
           }
-        } catch (Exception $ex) {
-        }
+        } catch (Exception $ex) { }
       }
     }
 
@@ -104,29 +88,6 @@
       $status = "In progress";
 
       if ($new_task != "" && $add_task_btn_click && $selected_user != "Invalid" && $selected_user != "") {
-        echo "<script>
-        const date = new Date();
-        let year = date.getFullYear();
-        let month = formatData(date.getMonth() + 1);
-        let day = formatData(date.getDate());
-        let hour = formatData(date.getHours());
-        let mins = formatData(date.getMinutes());
-        let secs = formatData(date.getSeconds());
-        let ms = formatMillisecond(date.getMilliseconds());
-        
-        function formatData(num) {
-          return num < 10 ? '0' + num : num + '';
-        }
-        
-        function formatMillisecond(num) {
-          if (num < 10) return '00' + num;
-          if (num < 100) return '0' + num;
-          return num + '';
-        }
-        
-        let TID = 'TID' + year + month + day + hour + mins + secs + ms;
-        document.cookie = 'pms_new_TID='+ TID;
-      </script>";
 
         $new_TID = $_COOKIE['pms_new_TID'];
         $user = "";
@@ -147,7 +108,7 @@
           if ($execute) {
             echo "<script>
                 alert('Task added successfully!');
-                window.open('index', '_self');
+                window.open('index.php', '_self');
               </script>";
           }
         } catch (Exception $ex) {

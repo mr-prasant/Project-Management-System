@@ -12,6 +12,6 @@ function getSelectedUser() {
 allTasks.forEach((task) => {
   task.addEventListener("click", () => {
     document.cookie = "PMS_tid=" + task.id;
-    window.open("./pages/view-task", "_self");
+    window.open("./pages/view-task.php", "_self");
   });
 });
